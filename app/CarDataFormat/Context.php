@@ -21,10 +21,6 @@ class Context
 
     public function executeStrategy()
     {
-        $strategyResult = [];
-        foreach ($this->objects as $object) {
-            array_push($strategyResult, $this->strategy->execute($object));
-        }
-        return $strategyResult;
+        return $this->strategy->execute($this->objects);
     }
 }

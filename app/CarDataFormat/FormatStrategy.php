@@ -4,6 +4,9 @@ namespace App\CarDataFormat;
 
 abstract class FormatStrategy implements FormatInterface
 {
+    private $sourceData;
+    private $resultFile;
+
     abstract protected function formatData($item, $value);
 
     private function createFileName()
@@ -17,20 +20,22 @@ abstract class FormatStrategy implements FormatInterface
         return $className . '_' . $currentDate . '.txt';
     }
 
-    private function createFileBody($objects)
+    public function setSourceData($object)
     {
-        $fileBody = '';
-        foreach ($objects as $object) {
-            foreach ($object as $item => $value) {
-                $fileBody = $fileBody . $this->formatData($item, $value);
-            }
-            $fileBody = $fileBody . "_______" . "\r\n";
+        $sourceData = '';
+
+        foreach ($object as $item => $value) {
+            $sourceData = $sourceData . $this->formatData($item, $value);
         }
-        return $fileBody;
+        $sourceData = $sourceData . "_______" . "\r\n";
+
+        $this->sourceData = $this->sourceData . $sourceData;
+        return $this;
     }
 
-    public function execute($objects)
+    public function getResultFile()
     {
-        return ['name' => $this->createFileName(), 'text' => $this->createFileBody($objects)];
+        $this->resultFile = ['name' => $this->createFileName(), 'text' => $this->sourceData];
+        return $this->resultFile;
     }
 }

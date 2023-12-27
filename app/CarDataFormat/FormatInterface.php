@@ -4,5 +4,6 @@ namespace App\CarDataFormat;
 
 interface FormatInterface
 {
-    public function execute($object);
+    public function setSourceData($object);
+    public function getResultFile();
 }

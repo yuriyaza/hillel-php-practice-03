@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('format', 'App\Http\Controllers\CarDataController@execute');
+Route::get('format', 'App\Http\Controllers\CarDataController@format');

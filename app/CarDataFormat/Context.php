@@ -22,8 +22,8 @@ class Context
     public function executeStrategy()
     {
         foreach ($this->objects as $object) {
-            $this->strategy->setSourceData($object);
+            $this->strategy->setFileData($object);
         }
-        return $this->strategy->getResultFile();
+        return $this->strategy->execute();
     }
 }
